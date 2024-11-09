@@ -87,6 +87,13 @@ with st.expander('Prediction'):
   prediction = clf.predict(encoded_input_penguin)
   prediction_proba = clf.predict_proba(encoded_input_penguin)
 
+  df_prediction_probs = pd.DataFrame(prediction_proba)
+  df_prediction_probs.rename(columns={0:'Adelie',
+                                     1: 'Chinstrap',
+                                     2: 'Gentoo'})
+
+  df_prediction_probs
+
   keys = list(target_mapper.keys())
   species = None
   for key in keys:

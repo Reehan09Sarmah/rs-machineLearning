@@ -102,7 +102,7 @@ with st.expander('Prediction'):
   st.write('**Prediction Probablities**')
   df_prediction_probs
   st.write('**Prediction**')
-  st.success(str(predicted_species))
+  st.success(str(predicted_species[0]))
   
 
     

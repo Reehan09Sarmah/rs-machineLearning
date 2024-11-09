@@ -88,19 +88,47 @@ with st.expander('Prediction'):
   prediction = clf.predict(encoded_input_penguin)
   prediction_proba = clf.predict_proba(encoded_input_penguin)
 
+  # Naming the columns of the array that contains probability value of each class
   df_prediction_probs = pd.DataFrame(prediction_proba)
   df_prediction_probs.columns = ['Adelie', 'Chinstrap', 'Gentoo']
   df_prediction_probs.rename(columns={0:'Adelie',
                                      1: 'Chinstrap',
                                      2: 'Gentoo'})
 
+  # get the predicted species name.
   penguin_species = np.array(['Adelie', 'Chinstrap', 'Gentoo'])
   predicted_species = penguin_species[prediction]
   
   st.write('**Input Data**')
   input_penguin
   st.write('**Prediction Probablities**')
-  df_prediction_probs
+  # lets use progress bars for showing probabilty values
+  st.dataframe(df_prediction_probs,
+              column_config={
+                'Adelie': st.column_config.ProgressColumn(
+                  'Adelie',
+                  format='%f',
+                  width='medium',
+                  min_value=0,
+                  max_value=1
+               ),
+               'Chinstrap': st.column_config.ProgressColumn(
+                  'Chinstrap',
+                  format='%f',
+                  width='medium',
+                  min_value=0,
+                  max_value=1
+               ),
+                'Gentoo': st.column_config.ProgressColumn(
+                  'Gentoo',
+                  format='%f',
+                  width='medium',
+                  min_value=0,
+                  max_value=1
+               )
+              }, hide_index=True)
+
+
   st.write('**Prediction**')
   st.success(str(predicted_species[0]))
   

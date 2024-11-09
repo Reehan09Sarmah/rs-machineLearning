@@ -11,12 +11,12 @@ with st.expander('DATA'):
   df
 
   st.write('**X ~ Input**')
-  X = df.drop('species', axis=1)
-  X
+  X_raw = df.drop('species', axis=1)
+  X_raw
 
   st.write('**Y ~ Output**')
-  Y = df.species
-  Y
+  y_raw = df.species
+  y_raw
 
 with st.expander('Data Visualization'):
   st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
@@ -43,16 +43,27 @@ with st.sidebar:
          'sex': gender}
 
   input_penguin = pd.DataFrame(data, index=[0])
-  input_penguin_data = pd.concat([input_penguin, X], axis=0)
+  input_penguin_data = pd.concat([input_penguin, X_raw], axis=0)
 
-  # Encode string categorical data using One Hot Encoding
-  encode = ['island', 'sex']
-  df_encoded = pd.get_dummies(input_penguin_data, prefix=encode, columns=encode)
-  encoded_input_penguin = df_encoded[:1]
+
+# Encode string categorical input data(X) using One Hot Encoding
+encode = ['island', 'sex']
+df_encoded = pd.get_dummies(input_penguin_data, prefix=encode, columns=encode)
+encoded_input_penguin = df_encoded[:1]
+
+# Encode Output Data(Y)
+target_mapper = {'Adelie': 0, 'Chinstrap': 1, 'Gentoo': 2} # assigning numerical value to the categories
+
+def target_encode(val):
+  return target_mapper[val]
+
+y = y_raw.apply(target_encode)  #applies above funtion to each value of Y_raw and returns new encoded data.
+y
+y_raw
 
 with st.expander('Input Features'):
   st.write('**Input Penguin Features**')
-  input_df
+  input_penguin
   st.write('**Combined Data**')
   input_penguin_data
   st.write('**Encoded Input Penguin Features')

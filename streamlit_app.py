@@ -93,6 +93,7 @@ with st.expander('Prediction'):
                                      1: 'Chinstrap',
                                      2: 'Gentoo'})
 
+  st.write('type')
   type(df_prediction_probs)
       
   st.write('**Input Data**')

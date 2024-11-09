@@ -42,19 +42,21 @@ with st.sidebar:
          'body_mass_g': body_mass_g,
          'sex': gender}
 
-  input_df = pd.DataFrame(data, index=[0])
-  input_penguin_data = pd.concat([input_df, X], axis=0)
+  input_penguin = pd.DataFrame(data, index=[0])
+  input_penguin_data = pd.concat([input_penguin, X], axis=0)
 
   # Encode string categorical data using One Hot Encoding
   encode = ['island', 'sex']
   df_encoded = pd.get_dummies(input_penguin_data, prefix=encode, columns=encode)
-  df_encoded[:1]
+  encoded_input_penguin = df_encoded[:1]
 
 with st.expander('Input Features'):
   st.write('**Input Penguin Features**')
   input_df
   st.write('**Combined Data**')
   input_penguin_data
+  st.write('**Encoded Input Penguin Features')
+  encoded_input_penguin
 
 
   

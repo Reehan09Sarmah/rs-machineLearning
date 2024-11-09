@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
+import numpy as np
 
 st.title('🎁 Machine Learning App')
 
@@ -93,14 +94,15 @@ with st.expander('Prediction'):
                                      1: 'Chinstrap',
                                      2: 'Gentoo'})
 
-  st.write('type')
-  type(df_prediction_probs)
-      
+  penguin_species = np.array(['Adelie', 'Chinstrap', 'Gentoo'])
+  predicted_species = penguin_species[prediction]
+  
   st.write('**Input Data**')
   input_penguin
   st.write('**Prediction Probablities**')
   df_prediction_probs
   st.write('**Prediction**')
+  st.success(str(predicted_species))
   
 
     

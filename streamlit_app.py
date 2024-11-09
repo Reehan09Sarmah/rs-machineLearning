@@ -93,13 +93,13 @@ with st.expander('Prediction'):
                                      1: 'Chinstrap',
                                      2: 'Gentoo'})
 
+  type(df_prediction_probs)
       
   st.write('**Input Data**')
   input_penguin
   st.write('**Prediction Probablities**')
   df_prediction_probs
   st.write('**Prediction**')
-  species
   
 
     

@@ -83,8 +83,9 @@ clf.fit(encoded_penguin_data_Xtrain, encoded_y)
 prediction = clf.predict(encoded_input_penguin)
 prediction_proba = clf.predict_proba(encoded_input_penguin)
 
-prediction
-prediction_proba
+# Prediction of Species
+keys = list(target_mapper.keys())
+keys
 
 
 

@@ -31,7 +31,7 @@ with st.sidebar:
   bill_length_mm = st.slider('Bill Length(mm)', min_value=32.1, max_value=59.6, value=43.9)
   bill_depth_mm = st.slider('Bill Depth(mm)', min_value=13.1, max_value=21.5, value=17.2)
   flipper_length_mm = st.slider('Flipper Length(mm)', min_value=172.0, max_value=231.0, value=201.0)
-  body_mass_g = st.slider('Body Mass(g)', min_value=2700.0, max_value=6300.0, value=4207.0)
+  body_mass_g = st.slider('Body Mass(g)', min_value=2700, max_value=6300, value=4207)
   gender = st.selectbox('Gender', ('male', 'female'))
   
   # create a dataframe

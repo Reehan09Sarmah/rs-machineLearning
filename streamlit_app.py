@@ -55,8 +55,9 @@ with st.expander('Input Features'):
 # Data preparation
 # Encode string categorical input data(X) using One Hot Encoding
 encode = ['island', 'sex']
-encoded_penguin_data_X = pd.get_dummies(input_penguin_data, prefix=encode, columns=encode)
-encoded_input_penguin = encoded_penguin_data_X[:1]
+encoded_penguin_data = pd.get_dummies(input_penguin_data, prefix=encode, columns=encode)
+encoded_penguin_data_Xtrain = encoded_penguin_data[1:] # for the model to train on
+encoded_input_penguin = encoded_penguin_data[:1] # the data row we created
 
 # Encode Output Data(Y)
 target_mapper = {'Adelie': 0, 'Chinstrap': 1, 'Gentoo': 2} # assigning numerical value to the categories
@@ -70,13 +71,13 @@ encoded_y = y_raw.apply(target_encode)  #applies above funtion to each value of 
 
 with st.expander('Data Preparation'):
   st.write('**Encoded X(Penguin Features)**')
-  encoded_penguin_data_X
+  encoded_penguin_data_Xtrain
   st.write('**Encoded y**')
   encoded_y
 
 # Model Training - Use encoded ones.
 clf = RandomForestClassifier()
-clf.fit(encoded_penguin_data_X, encoded_y)
+clf.fit(encoded_penguin_data_Xtrain, encoded_y)
 
 # predictions
 prediction = clf.predict(encoded_input_penguin)

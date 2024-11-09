@@ -21,8 +21,6 @@ with st.expander('DATA'):
 with st.expander('Data Visualization'):
   st.scatter_chart(data=df, x='bill_length_mm', y='body_mass_g', color='species')
 
-# Data Preparations
-
 # To let users create a data point of their own and add to the existing data
 with st.sidebar: 
   st.header('Input Features')
@@ -45,11 +43,19 @@ with st.sidebar:
   input_penguin = pd.DataFrame(data, index=[0])
   input_penguin_data = pd.concat([input_penguin, X_raw], axis=0)
 
+# Input Features
+with st.expander('Input Features'):
+  st.write('**Input Penguin Features**')
+  input_penguin
+  st.write('**Combined Data**')
+  input_penguin_data
+  
 
+# Data preparation
 # Encode string categorical input data(X) using One Hot Encoding
 encode = ['island', 'sex']
-df_encoded = pd.get_dummies(input_penguin_data, prefix=encode, columns=encode)
-encoded_input_penguin = df_encoded[:1]
+encoded_penguin_data_X = pd.get_dummies(input_penguin_data, prefix=encode, columns=encode)
+encoded_input_penguin = encoded_penguin_data_X[:1]
 
 # Encode Output Data(Y)
 target_mapper = {'Adelie': 0, 'Chinstrap': 1, 'Gentoo': 2} # assigning numerical value to the categories
@@ -57,17 +63,16 @@ target_mapper = {'Adelie': 0, 'Chinstrap': 1, 'Gentoo': 2} # assigning numerical
 def target_encode(val):
   return target_mapper[val]
 
-y = y_raw.apply(target_encode)  #applies above funtion to each value of Y_raw and returns new encoded data.
-y
+encoded_y = y_raw.apply(target_encode)  #applies above funtion to each value of Y_raw and returns new encoded data.
+encoded_y
 y_raw
 
-with st.expander('Input Features'):
-  st.write('**Input Penguin Features**')
-  input_penguin
-  st.write('**Combined Data**')
-  input_penguin_data
-  st.write('**Encoded Input Penguin Features')
-  encoded_input_penguin
+
+with st.expander('Data Preparation'):
+  st.write('**Encoded X(Penguin Features)**')
+  encoded_penguin_data_X
+  st.write('**Encoded y**')
+  encoded_y
 
 
   

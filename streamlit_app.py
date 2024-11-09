@@ -52,7 +52,8 @@ with st.expander('Input Features'):
   input_penguin_data
 
 # Encode string data into numerical
-df_encoded = pd.get_dummies(input_penguin_data, prefix=encode, columns=['island', 'sex'])
+encode = ['island', 'sex']
+df_encoded = pd.get_dummies(input_penguin_data, prefix=encode, columns=encode)
 df_encoded[:1]
   
   
